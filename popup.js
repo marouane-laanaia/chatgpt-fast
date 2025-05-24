@@ -6,12 +6,12 @@ const range  = document.getElementById('turns');
 const valOut = document.getElementById('val');
 
 //---------------------------------------------------------------
-// 2. Helper valeur paire
+// 2. Helper : impose un nombre pair ≥ 2
 //---------------------------------------------------------------
 const toEven = v => (v = Math.max(2, +v || 2), v % 2 ? v + 1 : v);
 
 //---------------------------------------------------------------
-// 3. Initialisation UI
+// 3. Init interface ← storage
 //---------------------------------------------------------------
 chrome.storage.sync.get({ enabled: true, maxTurns: 2 }, cfg => {
   toggle.checked     = cfg.enabled;
@@ -20,21 +20,10 @@ chrome.storage.sync.get({ enabled: true, maxTurns: 2 }, cfg => {
 });
 
 //---------------------------------------------------------------
-// 4. Toggle ON/OFF
+// 4. Toggle ON/OFF : enregistrement immédiat (plus de reload)
 //---------------------------------------------------------------
-toggle.addEventListener('change', () => {
-  const enabled = toggle.checked;
-  chrome.storage.sync.set({ enabled }, () => {
-    if (!enabled) {
-      /* on vient de désactiver → recharge l’onglet ChatGPT courant
-         pour rapatrier les messages qui avaient été supprimés
-         par les anciennes versions ou recalculer les hauteurs */
-      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        if (tabs[0]) chrome.tabs.reload(tabs[0].id);
-      });
-    }
-  });
-});
+toggle.addEventListener('change', () =>
+  chrome.storage.sync.set({ enabled: toggle.checked }));
 
 //---------------------------------------------------------------
 // 5. Slider : écriture temps réel
