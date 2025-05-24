@@ -1,0 +1,10 @@
+[
+  { "id": 1, "priority": 1, "action": { "type": "block" },
+    "condition": { "urlFilter": "js.intercomcdn.com", "resourceTypes": ["script"] } },
+  { "id": 2, "priority": 1, "action": { "type": "block" },
+    "condition": { "urlFilter": "widget.intercom.io", "resourceTypes": ["script"] } },
+  { "id": 3, "priority": 1, "action": { "type": "block" },
+    "condition": { "urlFilter": "cdn.amplitude.com", "resourceTypes": ["script"] } },
+  { "id": 4, "priority": 1, "action": { "type": "block" },
+    "condition": { "urlFilter": "browser.sentry-cdn.com", "resourceTypes": ["script"] } }
+]

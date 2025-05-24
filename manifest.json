@@ -1,0 +1,30 @@
+{
+  "name": "ChatGPT Fast UI",
+  "description": "Prune le DOM, coupe Prism/KaTeX et bloque analytics.",
+  "version": "1.1.0",
+  "manifest_version": 3,
+
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["https://chat.openai.com/*"],
+
+  "action": {                        
+    "default_title": "Fast UI",
+    "default_popup": "popup.html"
+  },
+
+  "options_page": "options.html",   
+
+  "declarative_net_request": {
+    "rule_resources": [
+      { "id": "ruleset_1", "enabled": true, "path": "rules.json" }
+    ]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
